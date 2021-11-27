@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace BancoBlueBank
 {
     class Program
     {
         private static List<Cliente> clientes = new List<Cliente>();
+         static  List <Agencia> agencias = new List<Agencia>();
+        static List <Conta> contacliente = new List<Conta>();
         static void Main(string[] args)
         {
             while (true)
@@ -25,6 +28,23 @@ namespace BancoBlueBank
                         break;
 
                     case 2:
+                    // Pedir confirmação se cliente está cadastrado através do CPF
+                        Console.WriteLine("Informe o CPF");
+                        var CPF = Console.ReadLine();
+                       
+                        foreach(var cli in clientes)
+                        {
+                            if (CPF == cli.Cpf) // se CPF digitado for igual a algume que esteja na lista, continuar
+                            {
+                                continue;
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("CPF não localizado"); // se for diferente, retornar.
+                                return;
+                            }
+                        }
                         Console.WriteLine("Selecione a operação desejada:\n");
                         Console.WriteLine("1 - Ver saldo\n" +
                                           "2 - Depositar\n" +
@@ -114,14 +134,69 @@ namespace BancoBlueBank
             throw new NotImplementedException();
         }
 
-        private static void verSaldo()
+        private static double verSaldo()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Voce optou por ver Saldo");
+            Thread.Sleep(10000);
+            Console.WriteLine("Informe a agencia");
+            var ag = new Agencia();
+            // necessário confirmar em arquivo de agencia, se a agencia digitada está correta;
+            Console.WriteLine("Informe a  conta");
+            var contac = new Conta();
+            // necessário confirmar se a conta existe;
+
+            Console.WriteLine("Digite a senha");
+            var s = Console.ReadLine();
+
+            if (s != contac.senha)
+            {
+                Console.WriteLine("Senha incorreta");
+            }
+            return contac.saldo;
+         
         }
 
         private static void cadastrarCliente()
         {
-            throw new NotImplementedException();
+        Console.WriteLine("Informe o CPF");
+        var CPF = Console.ReadLine();
+        var c = new Cliente();
+         
+        /// consultar se CPF já está cadastrado;
+        foreach( var cli in clientes) // fazer a varredura em lista de clientes cadastrados
+        {
+            if (CPF == cli.Cpf) // verificar se CPF digitado se parece com algum CPF cadastrado
+            {
+                Console.WriteLine("Cliente já cadastrado"); 
+                return;
+            }
+            else
+            {
+                c.Codigo = Guid.NewGuid(); // tentativa de fazer o código ser automático
+                c.Cpf=CPF;
+                Console.WriteLine("Informe o nome");
+                var nome = Console.ReadLine();
+                c.Nome=nome;
+                Console.WriteLine("Informe o endereço");
+                var endereço = Console.ReadLine();
+                c.Endereco=endereço;
+                
+                clientes.Add(c); // adicionando cliente.
+
+                // a ideia é ter um arquivo de agências pré-definida, pra podermos selecionar a agência 
+                // aí a conta é gerada no momento do cadastro
+                // pedimos para o beneficiário criar uma senha que será utilizada para validar transações
+
+
+                Console.WriteLine("Cliente cadastrado com sucesso");
+
+
+            }
+
+            
+        }
+        
+        
         }
     }
 }
