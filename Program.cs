@@ -126,26 +126,70 @@ namespace BancoBlueBank
 
         private static void sacar()
         {
-            throw new NotImplementedException();
-        }
+            Console.WriteLine("Você optou por sacar");
+            Thread.Sleep(4000);
+            Console.WriteLine("Informe a agência");
+            var ag = new Agencia();
+            // necessário confirmar em arquivo de agencia, se a agencia digitada está correta;
+            Console.WriteLine("Informe a conta");
+            var contac = new Conta();
+            // necessário confirmar se a conta existe;
+
+            Console.WriteLine("Digite a senha de sua conta");
+            var s = Console.ReadLine();
+
+            if (s != contac.senha)
+            {
+                Console.WriteLine("Senha incorreta");
+            }
+            else
+            {
+                Console.WriteLine("Informe o valor a ser sacado");
+                var valor = Convert.ToDouble(Console.ReadLine());
+                contac.Saldo -= valor;
+                Console.WriteLine("Saque realizado com sucesso!");
+            }
+            }
 
         private static void depositar()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Você optou por depositar");
+            Thread.Sleep(4000);
+            Console.WriteLine("Informe a agência");
+            var ag = new Agencia();
+            // necessário confirmar em arquivo de agencia, se a agencia digitada está correta;
+            Console.WriteLine("Informe a conta");
+            var contac = new Conta();
+            // necessário confirmar se a conta existe;
+
+            Console.WriteLine("Digite a senha de sua conta");
+            var s = Console.ReadLine();
+
+            if (s != contac.senha)
+            {
+                Console.WriteLine("Senha incorreta");
+            }
+                else
+                {
+                    Console.WriteLine("Informe o valor a ser depositado");
+                    var valor = Convert.ToDouble(Console.ReadLine());
+                    contac.Depositar(valor);
+                    Console.WriteLine("Depósito realizado com sucesso!");
+                }
         }
 
         private static double verSaldo()
         {
-            Console.WriteLine("Voce optou por ver Saldo");
-            Thread.Sleep(10000);
-            Console.WriteLine("Informe a agencia");
+            Console.WriteLine("Você optou por ver Saldo");
+            Thread.Sleep(4000);
+            Console.WriteLine("Informe a agência");
             var ag = new Agencia();
             // necessário confirmar em arquivo de agencia, se a agencia digitada está correta;
-            Console.WriteLine("Informe a  conta");
+            Console.WriteLine("Informe a conta");
             var contac = new Conta();
             // necessário confirmar se a conta existe;
 
-            Console.WriteLine("Digite a senha");
+            Console.WriteLine("Digite a senha de sua conta");
             var s = Console.ReadLine();
 
             if (s != contac.senha)
@@ -158,7 +202,7 @@ namespace BancoBlueBank
 
         private static void cadastrarCliente()
         {
-        Console.WriteLine("Informe o CPF");
+        Console.WriteLine("Informe o número do seu CPF");
         var CPF = Console.ReadLine();
         var c = new Cliente();
          
@@ -174,10 +218,10 @@ namespace BancoBlueBank
             {
                 c.Codigo = Guid.NewGuid(); // tentativa de fazer o código ser automático
                 c.Cpf=CPF;
-                Console.WriteLine("Informe o nome");
+                Console.WriteLine("Informe o seu nome");
                 var nome = Console.ReadLine();
                 c.Nome=nome;
-                Console.WriteLine("Informe o endereço");
+                Console.WriteLine("Informe o seu endereço");
                 var endereço = Console.ReadLine();
                 c.Endereco=endereço;
                 
@@ -187,16 +231,12 @@ namespace BancoBlueBank
                 // aí a conta é gerada no momento do cadastro
                 // pedimos para o beneficiário criar uma senha que será utilizada para validar transações
 
-
                 Console.WriteLine("Cliente cadastrado com sucesso");
 
-
             }
-
+        }
             
         }
         
-        
-        }
     }
 }
