@@ -5,7 +5,6 @@ namespace BancoBlueBank
     class Conta
     {
         public string senha {get;set;}
-        public double saldo {get;set;}
         public double Saldo { get; internal set; }
         public string numConta {get;set;}
         public Agencia agencia {get;set;}

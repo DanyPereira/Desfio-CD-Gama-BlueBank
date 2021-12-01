@@ -146,8 +146,17 @@ namespace BancoBlueBank
             {
                 Console.WriteLine("Informe o valor a ser sacado");
                 var valor = Convert.ToDouble(Console.ReadLine());
+                if (valor >contac.Saldo) // confirmando se valor informado é maior que o saldo
+                {
+                   Console.WriteLine($"Saldo insuficiente. Você possui {contac.Saldo}");
+                   return;
+                }
+                else
+                {
                 contac.Saldo -= valor;
                 Console.WriteLine("Saque realizado com sucesso!");
+                Console.WriteLine($"Saldo atual{contac.Saldo}");
+                }
             }
             }
 
@@ -196,7 +205,7 @@ namespace BancoBlueBank
             {
                 Console.WriteLine("Senha incorreta");
             }
-            return contac.saldo;
+            return contac.Saldo;
          
         }
 
