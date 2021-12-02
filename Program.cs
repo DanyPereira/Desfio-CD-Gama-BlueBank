@@ -182,7 +182,7 @@ namespace BancoBlueBank
                 {
                     Console.WriteLine("Informe o valor a ser depositado");
                     var valor = Convert.ToDouble(Console.ReadLine());
-                    contac.Depositar(valor);
+                    contac.Saldo+=valor;
                     Console.WriteLine("Depósito realizado com sucesso!");
                 }
         }
