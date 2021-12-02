@@ -7,10 +7,21 @@ namespace BancoBlueBank
     class Program
     {
         private static List<Cliente> clientes = new List<Cliente>();
-         static  List <Agencia> agencias = new List<Agencia>();
+        static List <Agencia> agencias = new List<Agencia>();
         static List <Conta> contacliente = new List<Conta>();
         static void Main(string[] args)
         {
+            Agencia Agencia1 = new Agencia(1, "Agência Epitácio Pessoa", "Av. Epitácio Pessoa, 354");
+            agencias.Add(Agencia1);
+            Agencia Agencia2 = new Agencia(2, "Agência Cabo Branco", "Av. Cabo Branco, 851");
+            agencias.Add(Agencia2);
+            Agencia Agencia3 = new Agencia(3, "Agência Torre", "Rua Otoniel Ribeiro, 58");
+            agencias.Add(Agencia3);
+            Agencia Agencia4 = new Agencia(4, "Agência Manaíra", "Rua Eurípedes Tavares, 47");
+            agencias.Add(Agencia4);
+            Agencia Agencia5 = new Agencia(5, "Agência Mangabeira", "Av. Hilton Souto Maior, 159");
+            agencias.Add(Agencia5);
+
             while (true)
             {
                 Console.WriteLine("Bem-vindo ao Banco BlueBank!\n");
@@ -128,9 +139,16 @@ namespace BancoBlueBank
         {
             Console.WriteLine("Você optou por sacar");
             Thread.Sleep(4000);
-            Console.WriteLine("Informe a agência");
-            var ag = new Agencia();
-            // necessário confirmar em arquivo de agencia, se a agencia digitada está correta;
+            Console.WriteLine("Selecione sua agência:");
+            foreach (var agencia in agencias)
+            {
+                Console.WriteLine($"{agencia.codAgencia} - {agencia.nomeAgencia} - {agencia.endereco}");
+                Console.WriteLine("---------------------------------------");
+            };
+            //Verificando se a agência escolhida existe na lista de agências disponíveis
+            int ag = Convert.ToInt16(Console.ReadLine());
+            Agencia agEscolhida = agencias.Find(a => a.codAgencia == ag);
+
             Console.WriteLine("Informe a conta");
             var contac = new Conta();
             // necessário confirmar se a conta existe;
@@ -164,9 +182,15 @@ namespace BancoBlueBank
         {
             Console.WriteLine("Você optou por depositar");
             Thread.Sleep(4000);
-            Console.WriteLine("Informe a agência");
-            var ag = new Agencia();
-            // necessário confirmar em arquivo de agencia, se a agencia digitada está correta;
+            Console.WriteLine("Selecione sua agência:");
+            foreach (var agencia in agencias)
+            {
+                Console.WriteLine($"{agencia.codAgencia} - {agencia.nomeAgencia} - {agencia.endereco}");
+                Console.WriteLine("---------------------------------------");
+            };
+            //Verificando se a agência escolhida existe na lista de agências disponíveis
+            int ag = Convert.ToInt16(Console.ReadLine());
+            Agencia agEscolhida = agencias.Find(a => a.codAgencia == ag);
             Console.WriteLine("Informe a conta");
             var contac = new Conta();
             // necessário confirmar se a conta existe;
@@ -191,9 +215,15 @@ namespace BancoBlueBank
         {
             Console.WriteLine("Você optou por ver Saldo");
             Thread.Sleep(4000);
-            Console.WriteLine("Informe a agência");
-            var ag = new Agencia();
-            // necessário confirmar em arquivo de agencia, se a agencia digitada está correta;
+            Console.WriteLine("Selecione sua agência:");
+            foreach (var agencia in agencias)
+            {
+                Console.WriteLine($"{agencia.codAgencia} - {agencia.nomeAgencia} - {agencia.endereco}");
+                Console.WriteLine("---------------------------------------");
+            };
+            //Verificando se a agência escolhida existe na lista de agências disponíveis
+            int ag = Convert.ToInt16(Console.ReadLine());
+            Agencia agEscolhida = agencias.Find(a => a.codAgencia == ag);
             Console.WriteLine("Informe a conta");
             var contac = new Conta();
             // necessário confirmar se a conta existe;
@@ -236,7 +266,6 @@ namespace BancoBlueBank
                 
                 clientes.Add(c); // adicionando cliente.
 
-                // a ideia é ter um arquivo de agências pré-definida, pra podermos selecionar a agência 
                 // aí a conta é gerada no momento do cadastro
                 // pedimos para o beneficiário criar uma senha que será utilizada para validar transações
 
