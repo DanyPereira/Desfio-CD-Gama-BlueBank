@@ -10,9 +10,6 @@ namespace BancoBlueBank
         public Agencia agencia {get;set;}
         public Cliente cliente {get;set;}
 
-        internal void Depositar(double valor)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
